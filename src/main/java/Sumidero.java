@@ -4,9 +4,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
-public class Sumidero implements Salida, Entrada{
+public class Sumidero implements Salida, Entrada, Runnable{
 
     private ArrayList<Entrada> output = new ArrayList<>();
+    private ArrayList<Data> input = new ArrayList<>();
     private File outputPeticiones;
     private File outputRespuestas;
     private void writeString(File file, String string){
@@ -43,6 +44,8 @@ public class Sumidero implements Salida, Entrada{
             Peticion peticion = (Peticion) data;
             double instante_peticion = peticion.getInstante_peticion();
             double tiempo_servicio = peticion.getTiempo_servicio();
+            System.out.print("Inst. peticion: " + instante_peticion);
+            System.out.println(" | T. servicio: " + tiempo_servicio);
             writeString(outputPeticiones,
             "Inst. peticion: " + instante_peticion + 
             " | T. servicio: " + tiempo_servicio);
@@ -73,6 +76,21 @@ public class Sumidero implements Salida, Entrada{
     }
     @Override
     public void enviar(Data data) {
-        procesarPeticion(data);
+        input.add(data);
+    }
+    @Override
+    public void run() {
+        while(true){
+            if(!input.isEmpty()){
+                procesarPeticion(input.get(0));
+                input.remove(0);
+            }
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
     }
 }

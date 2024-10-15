@@ -3,8 +3,9 @@ package main.java;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class CPD implements Entrada, Salida{
+public class CPD implements Entrada, Salida, Runnable{
     private ArrayList<Entrada> output = new ArrayList<>();
+    private ArrayList<Data> input = new ArrayList<>();
     private ArrayList<ArrayList<Peticion>> colas = new ArrayList<>();
     private double clock = 0;
     private int numeroProcesadores = 1;
@@ -92,7 +93,7 @@ public class CPD implements Entrada, Salida{
             respuesta.setTiempo_servicio(peticion.getTiempo_servicio());
             respuesta.setEstado(false);
         }
-
+        System.out.println("Peticion procesada");
         for (Entrada e : output) {
             e.enviar(respuesta);
         }
@@ -106,6 +107,21 @@ public class CPD implements Entrada, Salida{
     }
     @Override
     public void enviar(Data data) {
-        procesarPeticion(data);
+        input.add(data);
+    }
+    @Override
+    public void run() {
+        while(true){
+            if(!input.isEmpty()){
+                procesarPeticion(input.get(0));
+                input.remove(0);
+            }
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -3,13 +3,14 @@ package main.java;
 import java.util.Random;
 import java.util.ArrayList;
 
-public class Fuente implements Salida, Entrada{
+public class Fuente implements Salida, Entrada, Runnable{
     private final double MIN_T_INTER;
     private final double MAX_T_INTER;
     private final double MIN_T_SERV;
     private final double MAX_T_SERV;
     private final int MAX_LLEGADAS;
     private ArrayList<Entrada> output = new ArrayList<>();
+    private ArrayList<Data> input = new ArrayList<>();
     private int llegadas = 0;
 
     public Fuente(double min_t_inter, double max_t_inter, double min_t_serv, double max_t_serv, int max_llegadas){
@@ -20,10 +21,6 @@ public class Fuente implements Salida, Entrada{
         this.MAX_LLEGADAS = max_llegadas;
     }
     public void crearPeticion(){
-        if(llegadas >= MAX_LLEGADAS){
-            return;
-        }
-        llegadas ++;
         Random random = new Random();
         double instante_peticion;
         double tiempo_servicio;
@@ -33,14 +30,10 @@ public class Fuente implements Salida, Entrada{
         tiempo_servicio = random.nextDouble(MIN_T_SERV, MAX_T_SERV);
         peticion.setInstante_peticion(instante_peticion);
         peticion.setTiempo_servicio(tiempo_servicio);
+        System.out.println("Peticion generada");
         for (Entrada e : output) {
             e.enviar(peticion);
         }
-    }
-
-    public void run() {
-        llegadas = 0;
-        crearPeticion();
     }
 
     @Override
@@ -49,6 +42,19 @@ public class Fuente implements Salida, Entrada{
     }
     @Override
     public void enviar(Data data) {
-        crearPeticion();
+        input.add(data);
+    }
+    @Override
+    public void run() {
+        while (llegadas < MAX_LLEGADAS) {
+            crearPeticion();
+            llegadas++;
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
     }
 }
