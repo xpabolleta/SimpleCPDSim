@@ -7,7 +7,7 @@ public class Main {
         final double MAX_T_INTER = 0.5;
         final double MIN_T_SERV = 0.05;
         final double MAX_T_SERV = 0.5;
-        final int MAX_LLEGADAS = 10;
+        final int MAX_LLEGADAS = 100;
 
         Fuente fuente = new Fuente(MIN_T_INTER,MAX_T_INTER,MIN_T_SERV,MAX_T_SERV,MAX_LLEGADAS);
         CPD cpd = new CPD();
