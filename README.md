@@ -1,7 +1,6 @@
 # **SimpleCPDSim**
 
 A simple CPD system simulator in Java
-Project Description
 
 ## Description
 
