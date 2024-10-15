@@ -1,8 +1,8 @@
 #   SimpleCPDSim: ToDo list
 ##  ToDo
 ### Main tasks
-- [] Añadir funcionalidad para detener los hilos al finalizar la simulacion
-- [] Revisar que el resultado de la simulacion sea correcta (chatGPT, excel...)
+- [ ] Añadir funcionalidad para detener los hilos al finalizar la simulacion
+- [ ] Revisar que el resultado de la simulacion sea correcta (chatGPT, excel...)
 ### Optional tasks
 ##  In Progress
 ##  Done
