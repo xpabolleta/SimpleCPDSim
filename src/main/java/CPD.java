@@ -82,8 +82,7 @@ public class CPD implements Entrada, Salida, Runnable{
                 iterador.remove();
             }
         }
-
-        if(cola.size() <= tamañoCola){
+        if(cola.size() < tamañoCola){
             cola.add(peticion);
             respuesta.setInstante_peticion(peticion.getInstante_peticion());
             respuesta.setTiempo_servicio(peticion.getTiempo_servicio());
