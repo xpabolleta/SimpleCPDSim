@@ -75,20 +75,22 @@ public class Sumidero implements Salida, Entrada, Runnable{
         this.output.add(entrada);
     }
     @Override
-    public void enviar(Data data) {
-        input.add(data);
+    public synchronized void enviar(Data data) {
+        input.addLast(data);
+        notifyAll();
     }
     @Override
-    public void run() {
+    public synchronized void run() {
         while(true){
             if(!input.isEmpty()){
                 procesarPeticion(input.get(0));
                 input.remove(0);
-            }
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            }else{
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

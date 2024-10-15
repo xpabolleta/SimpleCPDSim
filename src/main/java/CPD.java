@@ -93,7 +93,6 @@ public class CPD implements Entrada, Salida, Runnable{
             respuesta.setTiempo_servicio(peticion.getTiempo_servicio());
             respuesta.setEstado(false);
         }
-        System.out.println("Peticion procesada");
         for (Entrada e : output) {
             e.enviar(respuesta);
         }
@@ -106,18 +105,19 @@ public class CPD implements Entrada, Salida, Runnable{
         this.output.add(entrada);
     }
     @Override
-    public void enviar(Data data) {
-        input.add(data);
+    public synchronized void enviar(Data data) {
+        input.addLast(data);
+        notifyAll();
     }
     @Override
-    public void run() {
+    public synchronized void run() {
         while(true){
             if(!input.isEmpty()){
                 procesarPeticion(input.get(0));
                 input.remove(0);
             }
             try {
-                Thread.sleep(50);
+                wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -30,7 +30,6 @@ public class Fuente implements Salida, Entrada, Runnable{
         tiempo_servicio = random.nextDouble(MIN_T_SERV, MAX_T_SERV);
         peticion.setInstante_peticion(instante_peticion);
         peticion.setTiempo_servicio(tiempo_servicio);
-        System.out.println("Peticion generada");
         for (Entrada e : output) {
             e.enviar(peticion);
         }
@@ -41,16 +40,17 @@ public class Fuente implements Salida, Entrada, Runnable{
         this.output.add(entrada);
     }
     @Override
-    public void enviar(Data data) {
-        input.add(data);
+    public synchronized void enviar(Data data) {
+        input.addLast(data);
+        notifyAll();
     }
     @Override
-    public void run() {
+    public synchronized void run() {
         while (llegadas < MAX_LLEGADAS) {
             crearPeticion();
             llegadas++;
             try {
-                Thread.sleep(50);
+                wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
