@@ -49,16 +49,6 @@ public class CPD implements Entrada, Salida, Runnable{
     }
 
     public void procesarPeticion(Data data){
-        /*
-         * ------------------------------------------------------------------------------
-         * TO DO
-         * ------------------------------------------------------------------------------
-         * [] Para procesar la peticion:
-         * una funcion que simule el procesamiento de un unico nucleo con cola tamañoCola
-         * y bucle for con el numero de procesadores (numeroProcesadores) que ejecute
-         * la funcion del nucleo individual
-         * [] Revisar que el resultado de la simulacion sea correcta (chatGPT, excel...)
-         */
         if( !(data instanceof Peticion) ){
             return;
         }
