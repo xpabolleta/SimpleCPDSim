@@ -1,0 +1,7 @@
+    MIN_T_INTER = 0.05
+    MAX_T_INTER = 0.5
+    MIN_T_SERV = 0.05
+    MAX_T_SERV = 5
+    MAX_LLEGADAS = 100
+    NUM_PROCESADOR = 1
+    TAMAÑO_COLA = 4
