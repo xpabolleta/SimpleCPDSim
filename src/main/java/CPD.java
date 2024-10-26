@@ -8,8 +8,8 @@ public class CPD implements Entrada, Salida, Runnable{
     private ArrayList<Data> input = new ArrayList<>();
     private ArrayList<ArrayList<Peticion>> colas = new ArrayList<>();
     private double clock = 0;
-    private int numeroProcesadores = 1;
-    private int tamañoCola = 4;
+    private int numeroProcesadores;
+    private int tamañoCola;
     private int procesadorActivo = 0;
     private void initialize(){
         clock = 0;
