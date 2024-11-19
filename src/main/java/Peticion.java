@@ -1,6 +1,6 @@
 package main.java;
 
-public class Peticion implements Data{
+public class Peticion extends Data{
     private double instante_peticion;
     private double tiempo_servicio;
 

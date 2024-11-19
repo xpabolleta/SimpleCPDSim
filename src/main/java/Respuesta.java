@@ -1,6 +1,6 @@
 package main.java;
 
-public class Respuesta implements Data{
+public class Respuesta extends Data{
     private double instante_peticion;
     private double tiempo_servicio;
     boolean estado;
