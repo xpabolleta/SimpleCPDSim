@@ -6,17 +6,13 @@ import java.util.Iterator;
 public class CPD implements Entrada, Salida, Runnable{
     private ArrayList<Entrada> output = new ArrayList<>();
     private ArrayList<Data> input = new ArrayList<>();
-    private ArrayList<ArrayList<Peticion>> colas = new ArrayList<>();
+    private ArrayList<Peticion> cola = new ArrayList<>();
     private double clock = 0;
     private int numeroProcesadores;
     private int tamañoCola;
     private int procesadorActivo = 0;
     private void initialize(){
         clock = 0;
-        for(int i = 0;i<numeroProcesadores;i++){
-            ArrayList<Peticion> cola = new ArrayList<>();
-            colas.add(cola);
-        }
     }
 
     public CPD(){
@@ -59,9 +55,7 @@ public class CPD implements Entrada, Salida, Runnable{
 
         Peticion peticion = (Peticion) data;
         Respuesta respuesta = new Respuesta();
-        ArrayList<Peticion> cola = new ArrayList<>();
 
-        cola = colas.get(procesadorActivo);
         clock += peticion.getInstante_peticion();
         peticion.setInstante_peticion(clock);
         
