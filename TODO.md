@@ -1,10 +1,12 @@
 #   SimpleCPDSim: ToDo list
 ##  ToDo
 ### Main tasks
-- [ ] Añadir funcionalidad para detener los hilos al finalizar la simulacion
+- [ ] Revisar lógica CPD
+- [ ] Añadir registros de tiempo en la cola, id de peticiones...
 - [ ] Revisar que el resultado de la simulacion sea correcta (chatGPT, excel...)
 ### Optional tasks
 - [ ] Añadir informacion del proyecto en README.md
+- [ ] Añadir funcionalidad para detener los hilos al finalizar la simulacion
 ##  In Progress
 ##  Done
 - [x] Para procesar la peticion:

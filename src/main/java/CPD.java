@@ -59,6 +59,11 @@ public class CPD implements Entrada, Salida, Runnable{
         clock += peticion.getInstante_peticion();
         peticion.setInstante_peticion(clock);
         
+        /*
+         * CREO QUE LA LOGICA DEL CPD ES INCORRECTA
+         * HAY QUE REVISAR EL CODIGO
+         */
+
         Iterator<Peticion> iterador = cola.iterator();
         while (iterador.hasNext()) {
             Peticion p = iterador.next();
